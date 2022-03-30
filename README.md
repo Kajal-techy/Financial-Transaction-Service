@@ -8,5 +8,6 @@ It is a multi-threaded application using executor framework where I send one req
 Few of the things I wanted to add if given more time : 
 1. Make my outgoing requests more resilient to network errors i.e. add Client side Timeouts, Retries etc
 2. Instead of sending a single request first to get the total-pages, I would have send configurable "N" request in parallel (based on TPS requirement of RestEasy) and keep sending N requests till I get a 404
-3. Have better error handling and throw appropriate errors with correct status signifying if its a dependency error or argument error etc.
-4. Write much more tests to improve the code coverage.
+3. Currently the map that I am populating is Map<LocalDate, Double> totalAmountByTransactionDate, I would rather change that to Map<LocalDate, FinancialSummary> summaryByTransactionDate to keep scope of capturing more financial summary (eg total credit, total debit, #of transactions etc) by date.
+4. Have better error handling and throw appropriate errors with correct status signifying if its a dependency error or argument error etc.
+5. Write much more tests to improve the code coverage.
