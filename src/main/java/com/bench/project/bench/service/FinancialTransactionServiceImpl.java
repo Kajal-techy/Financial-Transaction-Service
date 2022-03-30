@@ -26,11 +26,12 @@ public class FinancialTransactionServiceImpl implements FinancialTransactionServ
     public Map<LocalDate, Double> getAllFinancialTransaction() throws InterruptedException, ExecutionException {
         List<ResponseEntity<FinancialTransactionsResponse>> transactions = financialTransactionRepository.fetchAllTransactions();
         Map<LocalDate, Double> totalAmountByTransactionDate = new TreeMap<>();
-        this.createMap(transactions, totalAmountByTransactionDate);
+        this.populateTransactionsMap(transactions, totalAmountByTransactionDate);
         return totalAmountByTransactionDate;
     }
 
-    private void createMap(List<ResponseEntity<FinancialTransactionsResponse>> transactions, Map<LocalDate, Double> totalAmountByTransactionDate) {
+    // Populates the TreeMap with transaction summary by day
+    private void populateTransactionsMap(List<ResponseEntity<FinancialTransactionsResponse>> transactions, Map<LocalDate, Double> totalAmountByTransactionDate) {
         List<Transaction> transactionsList = new ArrayList<>();
         for (ResponseEntity<FinancialTransactionsResponse> transactionFromResponse : transactions) {
             if (transactionFromResponse.getBody() != null) {
